@@ -1,0 +1,39 @@
+import discord
+from discord.ext import commands
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='@', intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f'Вы вошли в нашего бота как {bot.user}')
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f'Привет! Я бот который расскажет и покажет тебе как улучшить экологию нашей страны {bot.user}!')
+
+@bot.command()
+async def mem(ctx):
+    with open('images/1674013134_gas-kvas-com-p-risunok-na-temu-mirovoi-okean-7.jpg', 'rb') as f:
+        # В переменную кладем файл, который преобразуется в файл библиотеки Discord!
+        picture = discord.File(f)
+   # Можем передавать файл как параметр!
+    await ctx.send(file=picture)
+@bot.command()
+async def text(ctx):
+    await ctx.send("""Кратко о том, что можно сделать для экологии прямо сейчас:
+
+1.Посадить дерево.
+2.Построить скворечник, синичник.
+3.Повесить и своевременно наполнять кормушку, поилку для птиц.
+4.Ездить волонтером на проекты по спасению, восстановлению, учету животных.
+5.Поддерживать фонды помощи животным.
+6.Реже пользоваться кондиционером.
+7.Убавлять индивидуальное отопление.
+8.Покупать энергосберегающие приборы.
+9.Сажать деревья.
+10.Выбрать электротранспорт.""")
+
+bot.run("")
